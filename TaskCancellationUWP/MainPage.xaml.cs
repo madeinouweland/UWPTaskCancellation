@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿// Made with ❤ in Berlin by Loek van den Ouweland
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -8,35 +6,32 @@ namespace TaskCancellationUWP
 {
     public sealed partial class MainPage : Page
     {
-        private CancellationTokenSource _cancel;
+        private Caller _caller;
 
         public MainPage()
         {
             this.InitializeComponent();
-        }
-
-        private async Task Foo(CancellationTokenSource cancel)
-        {
-            while (!cancel.IsCancellationRequested)
-            {
-                info.Text = DateTime.Now.Ticks + "";
-                await Task.Delay(2000);
-            }
-            info.Text = "cancelled";
+            info.Text = "ready";
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             info.Text = "starting task";
+            _caller = new Caller();
+            _caller.Report += _caller_Report;
+            await _caller.Start();
+            info.Text = "ready";
+        }
 
-            _cancel = new CancellationTokenSource();
-            await Foo(_cancel);
+        private void _caller_Report(object sender, string e)
+        {
+            info.Text = e;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             info.Text = "cancelling task";
-            _cancel.Cancel();
+            _caller.Cancel();
         }
     }
 
