@@ -23,6 +23,12 @@ namespace TaskCancellationUWP
             info.Text = "ready";
         }
 
+        private void Cancel()
+        {
+            _caller.Report -= _caller_Report;
+            _caller.Cancel();
+        }
+
         private void _caller_Report(object sender, string e)
         {
             info.Text = e;
@@ -31,8 +37,12 @@ namespace TaskCancellationUWP
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             info.Text = "cancelling task";
-            _caller.Cancel();
+            Cancel();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            _caller = null;
         }
     }
-
 }

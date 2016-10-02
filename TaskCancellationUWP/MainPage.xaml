@@ -9,8 +9,9 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Width="200" Margin="8" Content="Start task" Click="Button_Click" />
-            <Button Width="200" Margin="8" Content="Cancel task" Click="Button_Click_1"  />
+            <Button Width="400" Margin="8" Content="Start task" Click="Button_Click" />
+            <Button Width="400" Margin="8" Content="Cancel task" Click="Button_Click_1"  />
+            <Button Width="400" Margin="8" Content="Set caller to null (simulate navigate away)" Click="Button_Click_2"   />
             <TextBlock HorizontalAlignment="Center" Margin="8" x:Name="info" />
         </StackPanel>
     </Grid>
